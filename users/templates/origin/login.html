@@ -1,0 +1,20 @@
+
+{% extends 'origin/base.html' %}
+    {% block content %}
+
+    <center>
+        <h3> Page d'entree</h3><br/><br/>
+        <form action="/login/" method="POST">
+                <label> Nom Unitlisateur</label>
+                <input type="text" name="username"><br/><br>
+                <label> Mot de pass</label>
+                <input type="password" name="password"><br/><br/>
+
+
+                <input type="submit" value="Enter" class="btn btn-secondary">
+                {% csrf_token %}
+        </form>
+    </center>
+
+    {% endblock %}
+
