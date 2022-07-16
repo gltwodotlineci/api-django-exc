@@ -12,7 +12,7 @@ from rest_framework.permissions import AllowAny
 from rest_framework import permissions, status
 from rest_framework.views import APIView
 from rest_framework.permissions import IsAuthenticated
-from users.models import AuthenticTokenUs
+from users.models import AuthenticTokenUs, AuthenticateTwo
 
 #from . import permissions
 
@@ -116,6 +116,7 @@ class BatGameViewSet(viewsets.ViewSet):
 
 
 class EventViewSet(viewsets.ViewSet):
+
     def list(self, request):
         queryset = Event.objects.all()
         serializer = EventSerializer(queryset, many=True)
@@ -135,4 +136,11 @@ class EventViewSet(viewsets.ViewSet):
             return Response(serializer.data, status=status.HTTP_200_OK)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
     pass
+
+    def get_permission(self):
+        if self.action in ['list', 'retrieve']:
+            permission_classes = [permissions.AllowAny]
+        else:
+            permission_classes = [AuthenticateTwo]
+            return [permission() for permission in permission_classes]
 

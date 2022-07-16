@@ -1,6 +1,6 @@
 from django.urls import path
 from . import views
-from api.views import BatGameViewSet, EventViewSet
+from .views import BatGameViewSet, EventViewSet
 from rest_framework.routers import DefaultRouter
 from rest_framework_simplejwt.views import (
     TokenObtainPairView,
@@ -8,8 +8,8 @@ from rest_framework_simplejwt.views import (
 )
 
 router = DefaultRouter()
-router.register(r'api-games', BatGameViewSet, basename='api-games')
-router.register(r'api-events', EventViewSet, basename='api-events')
+router.register(r'api-games', BatGameViewSet, basename='api-games'),
+router.register(r'api-events', EventViewSet, basename='api-events'),
 urlpatterns = router.urls
 
 urlpatterns += [
